@@ -32,7 +32,7 @@ cd Mini-Helpdesk-System
 Copy the example environment file:
 ```bash
 cp .env.example .env
-
+```
 # Ex of database credentials
   DB_CONNECTION=mysql
   DB_HOST=db         
@@ -40,7 +40,7 @@ cp .env.example .env
   DB_DATABASE=helpdesk
   DB_USERNAME=helpdesk_user
   DB_PASSWORD=secret_password
-```
+
 *(Note: Inside the Docker container, the database credentials are pre-configured to automatically match the MySQL service defined in `docker-compose.yml`.)*
 
 ### 4. Build and Start the Containers
