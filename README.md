@@ -75,3 +75,19 @@ Run the PHP Unit / Feature tests inside the container using:
 ```bash
 docker-compose exec backend php artisan test
 ```
+
+---
+
+## API Documentation
+Interactive API docs are built using **Knuckles Scribe**.
+
+### Generate Documentation
+Generate or update the API documentation static and blade files by running:
+```bash
+docker-compose exec backend php artisan scribe:generate
+```
+
+### Access Documentation
+Once generated, you can view the documentation locally at:
+👉 **[http://localhost:8000/docs](http://localhost:8000/docs)**
+
