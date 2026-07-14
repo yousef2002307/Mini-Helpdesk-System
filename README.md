@@ -65,7 +65,8 @@ Once the containers are up and running, you can access the application at:
   - **Email**: `test@admin.com`
   - **Password**: `12345678`
 - **Standard User**:
-  - You can sign up with a new account directly via the user interface, or log in as the default admin to view the ticket queues.
+  - **Email**: `test@user.com`
+  - **Password**: `12345678`
 
 ---
 
