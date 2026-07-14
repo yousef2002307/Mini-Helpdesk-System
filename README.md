@@ -39,8 +39,8 @@ DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=helpdesk
-DB_USERNAME=helpdesk_user
-DB_PASSWORD=secret_password
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 ```
 
 *(Note: Inside the Docker container, the database credentials are pre-configured to automatically match the MySQL service defined in `docker-compose.yml`.)*
