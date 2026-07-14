@@ -1,6 +1,6 @@
 # Mini Helpdesk System
 
-A clean, modern Helpdesk and Ticketing System built using **Laravel 11**, **Inertia.js**, **React**, and **TypeScript**, styled with premium custom Vanilla CSS variables for a beautiful, responsive Light Mode user experience. The application runs fully containerized via Docker.
+A clean, modern Helpdesk and Ticketing System built using **Laravel 13**, **Inertia.js**, **React**, and **TypeScript**, styled with premium custom Vanilla CSS variables for a beautiful, responsive Light Mode user experience. The application runs fully containerized via Docker.
 
 ---
 
