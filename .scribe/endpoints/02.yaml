@@ -1,0 +1,364 @@
+name: 'Admin Tickets'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/tickets
+    metadata:
+      custom: []
+      groupName: 'Admin Tickets'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all tickets.'
+      description: 'Retrieve a paginated, filterable list of all support tickets across the entire system.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      status:
+        custom: []
+        name: status
+        description: 'Filter tickets by status. No-op if omitted.'
+        required: false
+        example: in_progress
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Number of items per page (max 50, default 10).'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      status: in_progress
+      per_page: 10
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "status": 200,
+            "success": true,
+            "message": "Tickets retrieved successfully.",
+            "data": [
+              {
+                "id": 1,
+                "title": "Database connection issue",
+                "description": "I cannot connect to the database from the client application.",
+                "status": "open",
+                "created_at": "2026-07-14T07:33:02.000000Z",
+                "updated_at": "2026-07-14T07:33:02.000000Z",
+                "user": {
+                  "id": 2,
+                  "name": "Normal User",
+                  "email": "test@user.com",
+                  "role": "user"
+                }
+              }
+            ],
+            "pagination": {
+              "current_page": 1,
+              "last_page": 1,
+              "per_page": 10,
+              "total": 1
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/admin/tickets/{ticket}'
+    metadata:
+      custom: []
+      groupName: 'Admin Tickets'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a single ticket.'
+      description: 'Retrieve details of a specific ticket across the system, including user details and replies.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      ticket:
+        custom: []
+        name: ticket
+        description: 'The ID of the ticket.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      ticket: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "status": 200,
+            "success": true,
+            "message": "Ticket retrieved successfully.",
+            "data": {
+              "id": 1,
+              "title": "Database connection issue",
+              "description": "I cannot connect to the database from the client application.",
+              "status": "open",
+              "created_at": "2026-07-14T07:33:02.000000Z",
+              "updated_at": "2026-07-14T07:33:02.000000Z",
+              "user": {
+                "id": 2,
+                "name": "Normal User",
+                "email": "test@user.com",
+                "role": "user"
+              },
+              "replies": [
+                {
+                  "id": 10,
+                  "ticket_id": 1,
+                  "user_id": 2,
+                  "body": "Can you check your credentials?",
+                  "created_at": "2026-07-14T07:34:00.000000Z",
+                  "updated_at": "2026-07-14T07:34:00.000000Z",
+                  "author": {
+                    "id": 2,
+                    "name": "Normal User",
+                    "email": "test@user.com",
+                    "role": "user"
+                  }
+                }
+              ]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/admin/tickets/{ticket_id}'
+    metadata:
+      custom: []
+      groupName: 'Admin Tickets'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update ticket status.'
+      description: 'Update the status of any support ticket in the system.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      ticket_id:
+        custom: []
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      ticket:
+        custom: []
+        name: ticket
+        description: 'The ID of the ticket.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      ticket_id: 1
+      ticket: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      status:
+        custom: []
+        name: status
+        description: 'The new status. Must be one of: open, in_progress, closed.'
+        required: true
+        example: in_progress
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      status: in_progress
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "status": 200,
+            "success": true,
+            "message": "Ticket status updated successfully.",
+            "data": {
+              "id": 1,
+              "title": "Database connection issue",
+              "description": "I cannot connect to the database from the client application.",
+              "status": "in_progress",
+              "created_at": "2026-07-14T07:33:02.000000Z",
+              "updated_at": "2026-07-14T07:34:30.000000Z"
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "status": 422,
+            "success": false,
+            "message": "The selected status is invalid."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/admin/tickets/{ticket_id}/replies'
+    metadata:
+      custom: []
+      groupName: 'Admin Tickets'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Add a reply to any ticket.'
+      description: 'Add an administrative response or answer to any support ticket in the system.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      ticket_id:
+        custom: []
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      ticket:
+        custom: []
+        name: ticket
+        description: 'The ID of the ticket.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      ticket_id: 1
+      ticket: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      body:
+        custom: []
+        name: body
+        description: 'The content of the admin reply message.'
+        required: true
+        example: 'We have verified the database is now up and reachable. Please check on your end.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      body: 'We have verified the database is now up and reachable. Please check on your end.'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "status": 201,
+            "success": true,
+            "message": "Admin reply added successfully.",
+            "data": {
+              "id": 12,
+              "ticket_id": 1,
+              "user_id": 1,
+              "body": "We have verified the database is now up and reachable. Please check on your end.",
+              "created_at": "2026-07-14T07:36:00.000000Z",
+              "updated_at": "2026-07-14T07:36:00.000000Z",
+              "author": {
+                "id": 1,
+                "name": "Admin User",
+                "email": "admin@example.com",
+                "role": "admin"
+              }
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

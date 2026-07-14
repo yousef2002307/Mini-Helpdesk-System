@@ -18,7 +18,40 @@ class ReplyController extends Controller
     ) {}
 
     /**
-     * Add a reply to one of the authenticated user's tickets.
+     * Add a reply to a ticket.
+     *
+     * Add a response or message thread update to one of the authenticated user's own tickets.
+     *
+     * @authenticated
+     * @group User Tickets
+     *
+     * @urlParam ticket integer required The ID of the ticket. Example: 1
+     * @bodyParam body string required The content of the reply message. Example: I checked, the host config was wrong. Fixed now!
+     *
+     * @response 201 {
+     *   "status": 201,
+     *   "success": true,
+     *   "message": "Reply added successfully.",
+     *   "data": {
+     *     "id": 11,
+     *     "ticket_id": 1,
+     *     "user_id": 2,
+     *     "body": "I checked, the host config was wrong. Fixed now!",
+     *     "created_at": "2026-07-14T07:35:00.000000Z",
+     *     "updated_at": "2026-07-14T07:35:00.000000Z",
+     *     "author": {
+     *       "id": 2,
+     *       "name": "Normal User",
+     *       "email": "test@user.com",
+     *       "role": "user"
+     *     }
+     *   }
+     * }
+     * @response 403 {
+     *   "status": 403,
+     *   "success": false,
+     *   "message": "This action is unauthorized."
+     * }
      */
     public function store(StoreReplyRequest $request, Ticket $ticket): JsonResponse
     {
