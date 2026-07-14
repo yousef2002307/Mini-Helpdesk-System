@@ -4,8 +4,8 @@ import AppLayout from '../Layouts/AppLayout';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../lib/api';
 import type { Ticket, TicketStatus } from '../types';
-import StatCard from '../Components/StatCard';
-import RecentTicketRow from '../Components/RecentTicketRow';
+import StatCard from '../Components/Dashboard/StatCard';
+import RecentTicketRow from '../Components/Tickets/RecentTicketRow';
 import { formatDateTime, StatusBadge, formatDate } from '../Functions/Index';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -24,9 +24,9 @@ export default function Dashboard() {
     const { isAuthenticated, isLoading: authLoading, isAdmin, user } = useAuth();
 
     const [recentTickets, setRecentTickets] = useState<Ticket[]>([]);
-    const [stats, setStats]                 = useState({ open: 0, in_progress: 0, closed: 0 });
-    const [loading, setLoading]             = useState(true);
-    const [error, setError]                 = useState<string | null>(null);
+    const [stats, setStats] = useState({ open: 0, in_progress: 0, closed: 0 });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     // Auth check
     useEffect(() => {

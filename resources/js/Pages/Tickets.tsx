@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Head, router } from '@inertiajs/react';
 import AppLayout from '../Layouts/AppLayout';
-import CreateTicketModal from '../Components/CreateTicketModal';
-import PaginationBar from '../Components/PaginationBar';
-import TicketTable from '../Components/TicketTable';
+import CreateTicketModal from '../Components/Tickets/CreateTicketModal';
+import PaginationBar from '../Components/Shared/PaginationBar';
+import TicketTable from '../Components/Tickets/TicketTable';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../lib/api';
 import type { Pagination, Ticket, TicketStatus } from '../types';

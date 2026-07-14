@@ -1,4 +1,4 @@
-import type { TicketStatus } from '../types';
+import type { TicketStatus } from '../../types';
 
 const STATUS_LABELS: Record<TicketStatus, string> = {
     open: 'Open',

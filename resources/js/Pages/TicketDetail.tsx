@@ -4,8 +4,8 @@ import AppLayout from '../Layouts/AppLayout';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../lib/api';
 import type { Reply, Ticket, TicketStatus } from '../types';
-import ReplyBubble from '../Components/ReplyBubble';
-import {  StatusBadge } from '../Functions/Index';
+import ReplyBubble from '../Components/Tickets/ReplyBubble';
+import { StatusBadge } from '../Functions/Index';
 import { Props } from '../types/index';
 
 
@@ -29,12 +29,12 @@ const STATUS_LABELS: Record<TicketStatus, string> = {
 export default function TicketDetail({ ticketId }: Props) {
     const { isAuthenticated, isLoading: authLoading, isAdmin, user } = useAuth();
 
-    const [ticket, setTicket]     = useState<Ticket | null>(null);
-    const [replies, setReplies]   = useState<Reply[]>([]);
-    const [loading, setLoading]   = useState(true);
+    const [ticket, setTicket] = useState<Ticket | null>(null);
+    const [replies, setReplies] = useState<Reply[]>([]);
+    const [loading, setLoading] = useState(true);
     const [replyBody, setReplyBody] = useState('');
-    const [sending, setSending]   = useState(false);
-    const [error, setError]       = useState<string | null>(null);
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [replyErr, setReplyErr] = useState<string | null>(null);
 
     const threadRef = useRef<HTMLDivElement>(null);

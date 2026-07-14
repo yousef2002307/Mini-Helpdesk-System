@@ -1,8 +1,8 @@
 
-import type { Reply } from '../types';
-import { formatDateTime } from '../Functions/Index';
+import type { Reply } from '../../types';
+import { formatDateTime } from '../../Functions/Index';
 function ReplyBubble({ reply, ownId }: { reply: Reply; ownId: number }) {
-    const isOwn  = reply.user_id === ownId;
+    const isOwn = reply.user_id === ownId;
     const isAdmR = reply.author?.role === 'admin';
 
     return (

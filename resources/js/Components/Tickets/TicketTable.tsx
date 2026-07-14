@@ -1,6 +1,6 @@
 import { router } from '@inertiajs/react';
-import StatusBadge from './StatusBadge';
-import type { Ticket } from '../types';
+import StatusBadge from '../Shared/StatusBadge';
+import type { Ticket } from '../../types';
 
 interface TicketTableProps {
     tickets: Ticket[];

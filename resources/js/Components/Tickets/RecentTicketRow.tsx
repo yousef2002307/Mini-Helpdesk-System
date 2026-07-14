@@ -1,7 +1,7 @@
 
-import type { Ticket } from "../types";
+import type { Ticket } from "../../types";
 import { router } from "@inertiajs/react";
-import { StatusBadge, formatDate } from "../Functions/Index";
+import { StatusBadge, formatDate } from "../../Functions/Index";
 // ─── Recent Ticket Card ───────────────────────────────────────────────────────
 
 function RecentTicketRow({ ticket }: { ticket: Ticket }) {
