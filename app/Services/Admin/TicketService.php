@@ -2,6 +2,8 @@
 
 namespace App\Services\Admin;
 
+use App\DTOs\Admin\StoreReplyDTO;
+use App\DTOs\Admin\UpdateTicketDTO;
 use App\Models\Reply;
 use App\Models\Ticket;
 use App\Models\User;
@@ -33,21 +35,21 @@ class TicketService
     }
 
     /**
-     * Update the status of a ticket.
+     * Update the status of a ticket from a DTO.
      */
-    public function updateStatus(Ticket $ticket, string $status): Ticket
+    public function updateStatus(Ticket $ticket, UpdateTicketDTO $dto): Ticket
     {
-        return $this->ticketRepository->updateStatus($ticket, $status);
+        return $this->ticketRepository->updateStatus($ticket, $dto->status);
     }
 
     /**
-     * Add an admin reply to a ticket.
+     * Add an admin reply to a ticket from a DTO.
      */
-    public function addReply(User $user, Ticket $ticket, string $body): Reply
+    public function addReply(User $user, Ticket $ticket, StoreReplyDTO $dto): Reply
     {
         return $ticket->replies()->create([
             'user_id' => $user->id,
-            'body'    => $body,
+            'body'    => $dto->body,
         ]);
     }
 }

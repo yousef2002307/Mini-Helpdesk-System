@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\DTOs\User\StoreReplyDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreReplyRequest;
 use App\Http\Resources\User\ReplyResource;
 use App\Models\Ticket;
 use App\Services\User\TicketService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ReplyController extends Controller
@@ -27,7 +27,7 @@ class ReplyController extends Controller
         $reply = $this->ticketService->addReply(
             $request->user(),
             $ticket,
-            $request->validated('body')
+            StoreReplyDTO::fromRequest($request)
         );
 
         $reply->load('user');

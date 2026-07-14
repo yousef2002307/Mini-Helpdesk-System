@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTOs\Admin\UpdateTicketDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateTicketRequest;
 use App\Http\Resources\Admin\TicketResource;
@@ -9,7 +10,6 @@ use App\Models\Ticket;
 use App\Services\Admin\TicketService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TicketController extends Controller
 {
@@ -61,7 +61,7 @@ class TicketController extends Controller
     {
         $updatedTicket = $this->ticketService->updateStatus(
             $ticket,
-            $request->validated('status')
+            UpdateTicketDTO::fromRequest($request)
         );
 
         return $this->successResponse(

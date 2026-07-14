@@ -2,6 +2,8 @@
 
 namespace App\Services\User;
 
+use App\DTOs\User\StoreReplyDTO;
+use App\DTOs\User\StoreTicketDTO;
 use App\Models\Reply;
 use App\Models\Ticket;
 use App\Models\User;
@@ -33,23 +35,21 @@ class TicketService
     }
 
     /**
-     * Create a new ticket for the user.
-     *
-     * @param  array<string, mixed>  $data
+     * Create a new ticket for the user from a DTO.
      */
-    public function create(User $user, array $data): Ticket
+    public function create(User $user, StoreTicketDTO $dto): Ticket
     {
-        return $this->ticketRepository->create($user, $data);
+        return $this->ticketRepository->create($user, $dto);
     }
 
     /**
-     * Add a reply to a ticket on behalf of the user.
+     * Add a reply to a ticket on behalf of the user from a DTO.
      */
-    public function addReply(User $user, Ticket $ticket, string $body): Reply
+    public function addReply(User $user, Ticket $ticket, StoreReplyDTO $dto): Reply
     {
         return $ticket->replies()->create([
             'user_id' => $user->id,
-            'body'    => $body,
+            'body'    => $dto->body,
         ]);
     }
 }

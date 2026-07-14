@@ -2,6 +2,8 @@
 
 namespace App\Services\Shared;
 
+use App\DTOs\Shared\LoginDTO;
+use App\DTOs\Shared\RegisterDTO;
 use App\Models\User;
 use App\Repositories\Shared\UserRepository;
 use Illuminate\Support\Facades\Hash;
@@ -16,12 +18,11 @@ class AuthService
     /**
      * Register a new user and return the user with an API token.
      *
-     * @param  array<string, mixed>  $data
      * @return array{user: User, token: string}
      */
-    public function register(array $data): array
+    public function register(RegisterDTO $dto): array
     {
-        $user = $this->userRepository->create($data);
+        $user = $this->userRepository->create($dto);
 
         $token = $user->createToken('api-token')->plainTextToken;
 
@@ -31,16 +32,15 @@ class AuthService
     /**
      * Authenticate a user and return an API token.
      *
-     * @param  array<string, mixed>  $credentials
      * @return array{user: User, token: string}
      *
      * @throws ValidationException
      */
-    public function login(array $credentials): array
+    public function login(LoginDTO $dto): array
     {
-        $user = $this->userRepository->findByEmail($credentials['email']);
+        $user = $this->userRepository->findByEmail($dto->email);
 
-        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! Hash::check($dto->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
@@ -62,4 +62,3 @@ class AuthService
         $this->userRepository->revokeCurrentToken($user);
     }
 }
-

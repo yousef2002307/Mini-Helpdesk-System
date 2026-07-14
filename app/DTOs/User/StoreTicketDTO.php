@@ -22,16 +22,4 @@ readonly class StoreTicketDTO
         );
     }
 
-    /**
-     * Convert DTO attributes to an array for mass-assignment.
-     *
-     * @return array<string, string>
-     */
-    public function toArray(): array
-    {
-        return [
-            'title'       => $this->title,
-            'description' => $this->description,
-        ];
-    }
 }

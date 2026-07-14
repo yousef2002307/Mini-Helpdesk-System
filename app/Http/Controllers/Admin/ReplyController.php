@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTOs\Admin\StoreReplyDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreReplyRequest;
 use App\Http\Resources\Admin\ReplyResource;
@@ -23,7 +24,7 @@ class ReplyController extends Controller
         $reply = $this->ticketService->addReply(
             $request->user(),
             $ticket,
-            $request->validated('body')
+            StoreReplyDTO::fromRequest($request)
         );
 
         $reply->load('user');

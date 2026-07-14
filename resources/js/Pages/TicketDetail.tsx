@@ -33,7 +33,7 @@ function formatDateTime(iso: string) {
 
 function ReplyBubble({ reply, ownId }: { reply: Reply; ownId: number }) {
     const isOwn  = reply.user_id === ownId;
-    const isAdmR = reply.user?.role === 'admin';
+    const isAdmR = reply.author?.role === 'admin';
 
     return (
         <div className={`flex gap-3 ${isOwn ? 'flex-row-reverse' : ''}`}>
@@ -47,14 +47,14 @@ function ReplyBubble({ reply, ownId }: { reply: Reply; ownId: number }) {
                     color: isAdmR ? '#fff' : 'var(--text-muted)',
                 }}
             >
-                {reply.user?.name?.charAt(0).toUpperCase() ?? '?'}
+                {reply?.author?.name?.charAt(0).toUpperCase() ?? '?'}
             </div>
 
             {/* Bubble */}
             <div className={`max-w-[72%] space-y-1 ${isOwn ? 'items-end' : 'items-start'} flex flex-col`}>
                 <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-subtle)' }}>
                     <span className="font-medium" style={{ color: 'var(--text-muted)' }}>
-                        {reply.user?.name ?? 'Unknown'}
+                        {reply?.author?.name ?? 'Unknown'}
                     </span>
                     {isAdmR && (
                         <span className="badge badge-open" style={{ fontSize: '0.62rem', padding: '0.1rem 0.4rem' }}>
@@ -114,6 +114,8 @@ export default function TicketDetail({ ticketId }: Props) {
             .then(res => {
                 setTicket(res.data);
                 setReplies(res.data.replies ?? []);
+                console.log("Ticket data : ", res.data);
+                console.log("Replies data : ", res.data.replies);
             })
             .catch(err => setError(err instanceof Error ? err.message : 'Failed to load ticket'))
             .finally(() => setLoading(false));

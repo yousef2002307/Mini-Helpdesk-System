@@ -24,17 +24,4 @@ readonly class RegisterDTO
         );
     }
 
-    /**
-     * Convert DTO attributes to an array.
-     *
-     * @return array<string, string>
-     */
-    public function toArray(): array
-    {
-        return [
-            'name'     => $this->name,
-            'email'    => $this->email,
-            'password' => $this->password,
-        ];
-    }
 }

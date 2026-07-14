@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\DTOs\User\StoreTicketDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreTicketRequest;
 use App\Http\Resources\User\TicketResource;
 use App\Services\User\TicketService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TicketController extends Controller
 {
@@ -50,7 +50,10 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request): JsonResponse
     {
-        $ticket = $this->ticketService->create($request->user(), $request->validated());
+        $ticket = $this->ticketService->create(
+            $request->user(),
+            StoreTicketDTO::fromRequest($request)
+        );
 
         return $this->successResponse(
             new TicketResource($ticket),

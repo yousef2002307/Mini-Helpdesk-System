@@ -2,6 +2,7 @@
 
 namespace App\Repositories\User;
 
+use App\DTOs\User\StoreTicketDTO;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -32,11 +33,12 @@ class TicketRepository
 
     /**
      * Create a new ticket for the given user.
-     *
-     * @param  array<string, mixed>  $data
      */
-    public function create(User $user, array $data): Ticket
+    public function create(User $user, StoreTicketDTO $dto): Ticket
     {
-        return $user->tickets()->create($data);
+        return $user->tickets()->create([
+            'title'       => $dto->title,
+            'description' => $dto->description,
+        ]);
     }
 }

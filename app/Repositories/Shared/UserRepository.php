@@ -4,19 +4,19 @@ namespace App\Repositories\Shared;
 
 use App\Models\User;
 
+use App\DTOs\Shared\RegisterDTO;
+
 class UserRepository
 {
     /**
      * Create a new standard user.
-     *
-     * @param  array<string, mixed>  $data
      */
-    public function create(array $data): User
+    public function create(RegisterDTO $dto): User
     {
         return User::create([
-            'name'     => $data['name'],
-            'email'    => $data['email'],
-            'password' => $data['password'],
+            'name'     => $dto->name,
+            'email'    => $dto->email,
+            'password' => $dto->password,
             'role'     => 'user',
         ]);
     }

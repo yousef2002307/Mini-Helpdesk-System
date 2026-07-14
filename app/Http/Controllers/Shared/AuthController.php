@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Shared;
 
+use App\DTOs\Shared\LoginDTO;
+use App\DTOs\Shared\RegisterDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shared\LoginRequest;
 use App\Http\Requests\Shared\RegisterRequest;
@@ -22,7 +24,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request): JsonResponse
     {
         ['user' => $user, 'token' => $token] = $this->authService->register(
-            $request->validated()
+            RegisterDTO::fromRequest($request)
         );
 
         return $this->successResponse([
@@ -37,7 +39,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         ['user' => $user, 'token' => $token] = $this->authService->login(
-            $request->validated()
+            LoginDTO::fromRequest($request)
         );
 
         return $this->successResponse([
@@ -47,7 +49,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Log out
+     * Log out the currently authenticated user.
      */
     public function logout(Request $request): JsonResponse
     {
