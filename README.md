@@ -63,6 +63,12 @@ Migrating is handled automatically during container startup. Run the database se
 docker-compose exec backend php artisan db:seed
 ```
 
+> [!IMPORTANT]
+> **Verify Application Key Generation:** Before attempting to log in or run tests, check your `.env` file on the host machine. Ensure the `APP_KEY` variable is present and populated. If it is empty or missing, run the following command to generate it:
+> ```bash
+> docker-compose exec backend php artisan key:generate
+> ```
+
 ---
 
 ## Accessing the Application
