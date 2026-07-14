@@ -1,0 +1,52 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: helpdesk-db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: helpdesk
+      MYSQL_USER: helpdesk_user
+      MYSQL_PASSWORD: secret_password
+      MYSQL_ROOT_PASSWORD: root_secret_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - helpdesk-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: helpdesk-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"   # PHP artisan serve
+      - "5173:5173"   # Vite dev server + HMR
+    volumes:
+      - .:/var/www
+      - /var/www/vendor          # keep vendor from image, don't override with host
+      - /var/www/node_modules    # keep node_modules from image, don't override with host
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=helpdesk
+      - DB_USERNAME=helpdesk_user
+      - DB_PASSWORD=secret_password
+      - VITE_HMR_HOST=localhost   # browser connects here for HMR websocket
+    depends_on:
+      - db
+    networks:
+      - helpdesk-network
+
+volumes:
+  db_data:
+
+networks:
+  helpdesk-network:
+    driver: bridge
